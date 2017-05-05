@@ -1,6 +1,6 @@
 
 group = 'cn.zxf'
-version = '1.0.0'
+version = '1.2.0'
 
 
 apply plugin: 'java'
@@ -17,7 +17,10 @@ dependencies {
 
 	// lombok
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
-	compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.24'
+	// compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.24'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
 	
 	// jUnit
 	testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -26,8 +29,6 @@ dependencies {
 
 
 // maven
-// cmd：gradle publishToMavenLocal
-// cmd：gradle publish
 apply plugin: 'maven-publish'
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
