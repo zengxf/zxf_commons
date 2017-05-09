@@ -6,4 +6,4 @@ gradle publish -Dfile.encoding=UTF-8
 
 引用：
 mavenLocal()
-compile group: 'cn.zxf', name: 'commons-basic', version: '1.3.0'
+compile group: 'cn.zxf', name: 'commons-generator', version: '1.3.0'

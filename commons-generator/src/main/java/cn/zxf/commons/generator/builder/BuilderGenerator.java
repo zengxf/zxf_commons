@@ -1,4 +1,4 @@
-package cn.zxf.commons.basic.generate;
+package cn.zxf.commons.generator.builder;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
  * @author zxf
  */
 @AllArgsConstructor
-public class BuilderGenerate {
+public class BuilderGenerator {
     private static final String	OBJ_SIGN = "value";
     private static final String	BR	 = "\n";
 
@@ -32,7 +32,7 @@ public class BuilderGenerate {
      * @return
      */
     public static String generateJavaCode( Class<?> clazz ) {
-	return new BuilderGenerate( clazz ).toJavaCode();
+	return new BuilderGenerator( clazz ).toJavaCode();
     }
 
     private String toJavaCode() {

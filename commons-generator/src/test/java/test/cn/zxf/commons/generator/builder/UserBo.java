@@ -1,4 +1,4 @@
-package test.cn.zxf.commons.basic.generate;
+package test.cn.zxf.commons.generator.builder;
 
 import lombok.Data;
 
