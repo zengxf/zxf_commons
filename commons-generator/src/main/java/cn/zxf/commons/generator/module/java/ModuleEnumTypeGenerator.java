@@ -19,7 +19,6 @@ public class ModuleEnumTypeGenerator extends AbstractClassGenerator {
             " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
-            "@Component\n" + //
             "public enum #class_name# {\n" + //
             "\n" + //
             "    ERROR(-1, \"类型错误\"), //\n" + //

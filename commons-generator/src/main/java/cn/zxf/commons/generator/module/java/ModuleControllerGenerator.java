@@ -26,7 +26,7 @@ public class ModuleControllerGenerator extends AbstractClassGenerator {
             " */\n" + //
             "@RestController\n" + //
             "@RequestMapping(\"#api_path#\")\n" + //
-            "public class #class_name# {\n" + //
+            "public class #class_name# extends BasicController {\n" + //
             "\n" + //
             "    @Autowired\n" + //
             "    private #module#Service service;\n" + //

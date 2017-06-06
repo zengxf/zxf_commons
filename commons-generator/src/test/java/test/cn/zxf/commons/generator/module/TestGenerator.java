@@ -11,13 +11,13 @@ public class TestGenerator {
 	        .basicPath( BASIC_PATH )//
 	        .author( "zengxf" )//
 	        .basicPackage( "com.hunterplus.server" )//
-	        .modulePackage( "subsystems.morning_news.news" )//
-	        .moduleEntityName( "MorningNews" )//
-	        .moduleComment( "早报" )//
-	        .apiPath( "/api/morning_news" )//
-	        .moduleEntityCollection( "morning_news" )//
-	        .createDtoPackage( true )//
-	        .createEnumsPackage( true )//
+	        .modulePackage( "finance.dun_mail" )//
+	        .moduleEntityName( "DunMail" )//
+	        .moduleComment( "催款邮件" )//
+	        .apiPath( "/api/finance/dun_mail" )//
+	        .moduleEntityCollection( "finance_dun_mail" )//
+	        .createDtoPackage( false )//
+	        .createEnumsPackage( false )//
 	        .build();
 
 	String descStr = desc.toString().replaceFirst( "\\(", "\n\t " ).replaceAll( ",|\\)", "\n\t" ).replace( "=", " = " );
