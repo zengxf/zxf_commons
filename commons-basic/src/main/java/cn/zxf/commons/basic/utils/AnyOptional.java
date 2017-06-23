@@ -14,16 +14,23 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AnyOptional< T > {
 
-    public final T   v;
-    public final T[] nonOpVs; // 不能操作的值
+    private final T v;
+    private T[]	    nonOpVs; // 不能操作的值
 
     public static < T > AnyOptional<T> of( T t ) {
 	return new AnyOptional<T>( t, null );
     }
 
-    @SafeVarargs
-    public static < T > AnyOptional<T> of( T t, T... nonOpVs ) {
-	return new AnyOptional<T>( t, nonOpVs );
+    /**
+     * 设置不能操作的值
+     *
+     * @param nonOpVs
+     * @return
+     */
+    @SuppressWarnings( "unchecked" )
+    public AnyOptional<T> nin( T... nonOpVs ) {
+	this.nonOpVs = nonOpVs;
+	return this;
     }
 
     /**
