@@ -13,39 +13,39 @@ import java.util.stream.Collectors;
 public class ClassUtil {
 
     public static Set<Field> getFields( Class<?> clazz ) {
-	Set<Field> temp = new HashSet<>();
+        Set<Field> temp = new HashSet<>();
 
-	while ( clazz != Object.class ) {
-	    Field[] fields = clazz.getDeclaredFields();
-	    for ( Field field : fields ) {
-		String name = field.getName();
-		int modifier = field.getModifiers();
-		boolean isField = name.matches( "[a-z][a-zA-Z0-9]*" );
-		if ( isField ) {
-		    boolean isStatic = Modifier.isStatic( modifier );
-		    boolean isFinal = Modifier.isFinal( modifier );
-		    if ( !isStatic && !isFinal ) {
-			temp.add( field );
-		    }
-		}
-	    }
-	    clazz = clazz.getSuperclass(); // 递归
-	}
+        while ( clazz != Object.class ) {
+            Field[] fields = clazz.getDeclaredFields();
+            for ( Field field : fields ) {
+                String name = field.getName();
+                int modifier = field.getModifiers();
+                boolean isField = name.matches( "[a-z][a-zA-Z0-9]*" );
+                if ( isField ) {
+                    boolean isStatic = Modifier.isStatic( modifier );
+                    boolean isFinal = Modifier.isFinal( modifier );
+                    if ( !isStatic && !isFinal ) {
+                        temp.add( field );
+                    }
+                }
+            }
+            clazz = clazz.getSuperclass(); // 递归
+        }
 
-	return temp;
+        return temp;
     }
 
     public static List<Method> getSetMethods( Class<?> clazz ) {
-	List<Method> list = new ArrayList<>();
-	while ( clazz != Object.class ) {
-	    Method[] ms = clazz.getDeclaredMethods();
-	    List<Method> temp = Arrays.stream( ms ) //
-	            .filter( method -> method.getName().startsWith( "set" ) ) //
-	            .collect( Collectors.toList() );
-	    list.addAll( temp );
-	    clazz = clazz.getSuperclass();
-	}
-	return list;
+        List<Method> list = new ArrayList<>();
+        while ( clazz != Object.class ) {
+            Method[] ms = clazz.getDeclaredMethods();
+            List<Method> temp = Arrays.stream( ms ) //
+                    .filter( method -> method.getName().startsWith( "set" ) ) //
+                    .collect( Collectors.toList() );
+            list.addAll( temp );
+            clazz = clazz.getSuperclass();
+        }
+        return list;
     }
 
 }

@@ -24,7 +24,7 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
             " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
-            "@Document(collection = \"morning_news\")\n" + //
+            "@Document(collection = \"#collection#\")\n" + //
             "@Data\n" + //
             "public class #class_name# extends BasicModelObject implements #module#Constant {\n" + //
             "\n" + //
@@ -34,12 +34,12 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
             "}\n";
 
     protected ModuleEntityGenerator( ModuleDescriptor desc ) {
-	super( ClassTypeEnum.ENTITY, desc );
+        super( ClassTypeEnum.ENTITY, desc );
     }
 
     @Override
     protected String getClassFormat() {
-	return CONTENT_FORMAT;
+        return CONTENT_FORMAT;
     }
 
     /**
@@ -49,7 +49,7 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
      * @return
      */
     public static ModuleEntityGenerator of( ModuleDescriptor desc ) {
-	return new ModuleEntityGenerator( desc );
+        return new ModuleEntityGenerator( desc );
     }
 
 }

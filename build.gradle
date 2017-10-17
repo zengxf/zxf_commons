@@ -1,0 +1,52 @@
+subprojects {
+
+	group = 'cn.zxf'
+	version = '1.5.0'
+	
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+
+	repositories {
+	    maven {
+	        url "http://maven.aliyun.com/nexus/content/groups/public/"
+	    }
+	    mavenCentral()
+	}
+
+	dependencies {
+
+		// lombok
+		compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+		// compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.24'
+		compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+		compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+		compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+		
+		// jUnit
+		testCompile group: 'junit', name: 'junit', version: '4.12'
+		
+	}
+
+
+	// maven
+	apply plugin: 'maven-publish'
+	task sourceJar(type: Jar) {
+	    from sourceSets.main.allJava
+	}
+	publishing {
+	    publications {
+	        mavenJava(MavenPublication) {
+	            from components.java
+	            artifact sourceJar {
+	                classifier "sources"
+	            }
+	        }
+	    }
+	    repositories {
+	        maven {
+	            url "releases"
+	        }
+	    }
+	}
+
+}

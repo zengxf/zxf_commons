@@ -25,39 +25,39 @@ import lombok.extern.slf4j.Slf4j;
 public class ModuleGenerator {
 
     public static void generate( ModuleDescriptor desc ) {
-	createDtoPackage( desc );
-	createEnumsPackage( desc );
+        createDtoPackage( desc );
+        createEnumsPackage( desc );
 
-	ModuleDaoGenerator.of( desc ).generateFile();
-	ModuleServiceGenerator.of( desc ).generateFile();
-	ModuleControllerGenerator.of( desc ).generateFile();
-	ModuleConstantGenerator.of( desc ).generateFile();
-	ModuleEntityGenerator.of( desc ).generateFile();
+        ModuleDaoGenerator.of( desc ).generateFile();
+        ModuleServiceGenerator.of( desc ).generateFile();
+        ModuleControllerGenerator.of( desc ).generateFile();
+        ModuleConstantGenerator.of( desc ).generateFile();
+        ModuleEntityGenerator.of( desc ).generateFile();
     }
 
     static void createDtoPackage( ModuleDescriptor desc ) {
-	if ( desc.createDtoPackage ) {
-	    Path path = Paths.get( desc.basicPath, ClassTypeEnum.DTO_FACTORY.parentPath );
-	    try {
-		Files.createDirectories( path );
-		ModuleDtoFactoryGenerator.of( desc ).generateFile();
-	    } catch ( IOException e ) {
-		log.error( "创建 dto 包时出错！", e );
-	    }
-	}
+        if ( desc.createDtoPackage ) {
+            Path path = Paths.get( desc.basicPath, ClassTypeEnum.DTO_FACTORY.parentPath );
+            try {
+                Files.createDirectories( path );
+                ModuleDtoFactoryGenerator.of( desc ).generateFile();
+            } catch ( IOException e ) {
+                log.error( "创建 dto 包时出错！", e );
+            }
+        }
     }
 
     static void createEnumsPackage( ModuleDescriptor desc ) {
-	if ( desc.createEnumsPackage ) {
-	    Path path = Paths.get( desc.basicPath, ClassTypeEnum.ENUM_TYPE.parentPath );
-	    try {
-		Files.createDirectories( path );
-		ModuleEnumTypeGenerator.of( desc ).generateFile();
-		ModuleEnumStatusGenerator.of( desc ).generateFile();
-	    } catch ( IOException e ) {
-		log.error( "创建 enums 包时出错！", e );
-	    }
-	}
+        if ( desc.createEnumsPackage ) {
+            Path path = Paths.get( desc.basicPath, ClassTypeEnum.ENUM_TYPE.parentPath );
+            try {
+                Files.createDirectories( path );
+                ModuleEnumTypeGenerator.of( desc ).generateFile();
+                ModuleEnumStatusGenerator.of( desc ).generateFile();
+            } catch ( IOException e ) {
+                log.error( "创建 enums 包时出错！", e );
+            }
+        }
     }
 
 }
