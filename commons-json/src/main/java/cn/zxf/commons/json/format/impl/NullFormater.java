@@ -6,7 +6,7 @@ public class NullFormater implements Formater {
 
     @Override
     public String format( Object obj ) {
-        return NULL_STRING;
+        return STR_NULL;
     }
 
 }

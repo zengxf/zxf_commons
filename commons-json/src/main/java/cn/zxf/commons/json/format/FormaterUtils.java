@@ -1,20 +1,19 @@
 package cn.zxf.commons.json.format;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Stream;
 
 import cn.zxf.commons.json.exceptions.GetFormaterException;
 
 class FormaterUtils {
 
-    static Map<Class<?>, Formater> map = new HashMap<>();
+    static ConcurrentMap<Class<?>, Formater> map = new ConcurrentHashMap<>();
 
     static {
         map.put( String.class, obj -> "\"" + obj + "\"" );
-        map.put( int.class, toStringFormater() );
         map.put( Integer.class, toStringFormater() );
-        map.put( boolean.class, toStringFormater() );
+        map.put( Double.class, toStringFormater() );
         map.put( Boolean.class, toStringFormater() );
     }
 
@@ -23,6 +22,10 @@ class FormaterUtils {
     }
 
     static Formater javaLangFormater( Class<?> clazz ) {
+        Formater fmt = map.get( clazz );
+        if ( fmt != null )
+            return fmt;
+
         FormatTypeEnum fmtType = Stream.of( FormatTypeEnum.values() ) //
                 .filter( type -> type.srcClass.isAssignableFrom( clazz ) ) //
                 .findFirst() //
@@ -33,7 +36,9 @@ class FormaterUtils {
 
         Class<? extends Formater> fmtClass = fmtType.formaterClass;
         try {
-            return fmtClass.newInstance();
+            fmt = fmtClass.newInstance();
+            map.put( clazz, fmt );
+            return fmt;
         } catch ( InstantiationException | IllegalAccessException e ) {
             throw new GetFormaterException( clazz + " 的格式器[" + fmtClass + "]实例化出错", e );
         }

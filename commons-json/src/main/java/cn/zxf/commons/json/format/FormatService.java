@@ -8,7 +8,7 @@ public class FormatService extends FormaterUtils implements JsonConstant {
 
     public static String format( Object obj ) {
         if ( obj == null )
-            return NULL_STRING;
+            return STR_NULL;
         Class<?> clazz = obj.getClass();
         return getFormater( clazz ).format( obj );
     }

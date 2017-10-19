@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import cn.zxf.commons.json.commons.ClassFieldUtils;
-import cn.zxf.commons.json.exceptions.FormatException;
+import cn.zxf.commons.json.exceptions.FormattingException;
 import cn.zxf.commons.json.format.FormatService;
 import cn.zxf.commons.json.format.Formater;
 
@@ -32,7 +32,7 @@ public class CustomBeanFormater implements Formater {
                         String k = f.getName();
                         return FormatService.format( k ) + ": " + FormatService.format( v );
                     } catch ( IllegalArgumentException | IllegalAccessException e ) {
-                        throw new FormatException( "提取自定义 Bean 的字段值时出错", e );
+                        throw new FormattingException( "提取自定义 Bean 的字段值时出错", e );
                     }
                 } ) //
                 .filter( Objects::nonNull ) //

@@ -1,13 +1,13 @@
 package cn.zxf.commons.json.format;
 
 import cn.zxf.commons.json.commons.JsonConstant;
-import cn.zxf.commons.json.exceptions.FormatException;
+import cn.zxf.commons.json.exceptions.FormattingException;
 import lombok.NonNull;
 
 public interface Formater extends JsonConstant {
 
     Formater NULL = obj -> {
-        throw new FormatException( "还未实现方法" );
+        throw new FormattingException( "还未实现方法" );
     };
 
     /**

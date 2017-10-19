@@ -1,6 +1,7 @@
 package cn.zxf.commons.json;
 
 import cn.zxf.commons.json.format.FormatService;
+import cn.zxf.commons.json.parse.ParserService;
 
 /**
  * commons-json 的封装类
@@ -15,13 +16,11 @@ public class Json {
     }
 
     public static Object parseJson( String json ) {
-//        if ( NULL_STRING.equals( json ) )
-//            return NULL_OBJECT;
-        return null;
+        return ParserService.parse( json );
     }
 
     public static < T > T parseJson( String json, Class<T> clazz ) {
-        return null;
+        return ParserService.parseJson( json, clazz );
     }
 
 }
