@@ -21,3 +21,5 @@ compile group: 'cn.zxf', name: '${name}', version: '${commons-version}'
 
 ## commons-json
 json 工具类
+10w 次解析耗时 1.2 s
+10w 次格式化耗时 0.6 s
