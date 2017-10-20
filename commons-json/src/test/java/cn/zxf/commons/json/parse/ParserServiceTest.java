@@ -24,7 +24,15 @@ public class ParserServiceTest {
             Object res = ParserService.parse( json );
             log.info( "parse result: {}", res );
         }
-        
+
+        @Test
+        public void testObjectAndNull() {
+            String json = "{\"name\": \"zxf-{}\", \"age\": 23, \"test-null\": null}";
+            log.info( "correct-json: {}", json );
+            Object res = ParserService.parse( json );
+            log.info( "parse result: {}", res );
+        }
+
         @Test
         public void testComplexCorrect() {
             String json = "{\"name\": \"zxf-{}\", \"address\":{\"code\": 10}, \"age\": 23, \"activate\": true}";

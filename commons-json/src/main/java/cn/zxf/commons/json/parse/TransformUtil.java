@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import cn.zxf.commons.json.commons.ClassFieldUtils;
 import cn.zxf.commons.json.exceptions.TransformingException;
-import cn.zxf.commons.json.parse.transformer.GetTransformerUtils;
+import cn.zxf.commons.json.parse.transformer.TransformerFactor;
 import cn.zxf.commons.json.parse.transformer.Transformer;
 
 class TransformUtil {
@@ -22,7 +22,7 @@ class TransformUtil {
         if ( obj.getClass() == clazz )
             return (T) obj;
 
-        Transformer<?> tf = GetTransformerUtils.get( clazz );
+        Transformer<?> tf = TransformerFactor.get( clazz );
         if ( tf != null )
             return (T) tf.trans( obj );
 

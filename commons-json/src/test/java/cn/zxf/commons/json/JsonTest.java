@@ -36,6 +36,17 @@ public class JsonTest {
         }
 
         @Test
+        public void mapAndNullToJson() {
+            Map<String, Object> map = new HashMap<>();
+            map.put( "age", 23 );
+            map.put( "name", "zxf" );
+            map.put( "activity", true );
+            map.put( "test-null", null );
+            String json = Json.toJson( map );
+            log.info( "map-json: {}", json );
+        }
+
+        @Test
         @SuppressWarnings( { "rawtypes", "unchecked" } )
         public void listToJson() {
             List list = new ArrayList();

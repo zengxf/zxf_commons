@@ -4,7 +4,7 @@ import cn.zxf.commons.json.commons.JsonConstant;
 import cn.zxf.commons.json.exceptions.GetFormaterException;
 import cn.zxf.commons.json.format.impl.CustomBeanFormater;
 
-public class FormatService extends FormaterUtils implements JsonConstant {
+public class FormatService extends FormaterFactor implements JsonConstant {
 
     public static String format( Object obj ) {
         if ( obj == null )
@@ -15,10 +15,6 @@ public class FormatService extends FormaterUtils implements JsonConstant {
 
     static Formater getFormater( Class<?> clazz ) {
         Formater fmt = defFormater( clazz );
-        if ( isNonNull( fmt ) )
-            return fmt;
-
-        fmt = javaLangFormater( clazz );
         if ( isNonNull( fmt ) )
             return fmt;
 
