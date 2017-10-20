@@ -118,6 +118,7 @@ public class JsonTest {
         public void parse() {
             String json = "{\"name\": \"zxf\", \"age\": 23, \"status\": 2, \"activity\": true, " + //
                     " \"group\": {\"id\": 10001, \"groupName\": \"zxf-test\"}, \"sex\": \"男\"}";
+            log.info( "json: {}", json );
 
             int count = 10_0000;
             long start = System.currentTimeMillis();
@@ -125,6 +126,50 @@ public class JsonTest {
                 Json.parseJson( json, User.class );
             }
             log.info( "[{}] 次解析耗时：{}", count, System.currentTimeMillis() - start );
+        }
+
+    }
+
+    public static class TestPreheatPerformance {
+        @Test
+        public void format() {
+            Group group = Group.builder().id( 10001 ).groupName( "zxf-test" ).build();
+            User user = User.builder().name( "zxf" )//
+                    .address( "湖南" ) //
+                    .age( 23 ).status( 2 ).activity( true ).group( group ).build();
+            user.sex = "男";
+            log.info( "user: {}", user );
+
+            int count = 2_0000;
+            for ( int i = 0; i < count; i++ ) {
+                Json.toJson( user );
+            }
+
+            count = 10_0000;
+            long start = System.currentTimeMillis();
+            for ( int i = 0; i < count; i++ ) {
+                Json.toJson( user );
+            }
+            log.info( "[预热] [{}] 次格式化耗时：{}", count, System.currentTimeMillis() - start );
+        }
+
+        @Test
+        public void parse() {
+            String json = "{\"name\": \"zxf\", \"age\": 23, \"status\": 2, \"activity\": true, " + //
+                    " \"group\": {\"id\": 10001, \"groupName\": \"zxf-test\"}, \"sex\": \"男\"}";
+            log.info( "json: {}", json );
+
+            int count = 2_0000;
+            for ( int i = 0; i < count; i++ ) {
+                Json.parseJson( json, User.class );
+            }
+
+            count = 10_0000;
+            long start = System.currentTimeMillis();
+            for ( int i = 0; i < count; i++ ) {
+                Json.parseJson( json, User.class );
+            }
+            log.info( "[预热] [{}] 次解析耗时：{}", count, System.currentTimeMillis() - start );
         }
     }
 
