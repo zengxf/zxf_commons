@@ -14,13 +14,9 @@ class ParsePlainUtils implements JsonConstant {
             res = null;
         } else if ( res == null ) {
             try {
-                res = Integer.valueOf( plain );
-            } catch ( NumberFormatException e ) {
-                try {
-                    res = Double.valueOf( plain );
-                } catch ( NumberFormatException e1 ) {
-                    throw new NonSupportedPlainException( "不支持此类普通解析！plain: " + plain );
-                }
+                res = Double.valueOf( plain );
+            } catch ( NumberFormatException e1 ) {
+                throw new NonSupportedPlainException( "不支持此类普通解析！plain: " + plain );
             }
         }
         return res;

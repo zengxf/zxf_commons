@@ -1,6 +1,6 @@
 package cn.zxf.commons.json.parse.parser.impl;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import cn.zxf.commons.json.exceptions.JsonFormatException;
@@ -13,7 +13,7 @@ public class ObjectParser extends AbstractParser {
         super( json, arr, index );
     }
 
-    Map<String, Object> map       = new HashMap<>();
+    Map<String, Object> map       = new LinkedHashMap<>();
     String              key       = null;
     boolean             signValue = false;
     Object              value     = null;
