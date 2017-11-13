@@ -1,14 +1,16 @@
 package cn.zxf.commons.data_mining.numbers;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
 import cn.zxf.commons.data_mining.commons.FileUtils;
+import cn.zxf.commons.data_mining.commons.MapUtils;
+import cn.zxf.commons.data_mining.numbers.distance.Manhattan;
+import cn.zxf.commons.data_mining.numbers.distance.Pearson;
+import cn.zxf.commons.data_mining.numbers.distance.PearsonSimilar;
 import cn.zxf.commons.json.Json;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,8 +20,7 @@ public class TestDistanceByFile {
     @SuppressWarnings( "rawtypes" )
     @Test
     public void test_manhattan() throws IOException {
-        Object json = Json.parseJson( FileUtils.path( "/ch2/test.json" ) );
-        Map map = (Map) json;
+        Map map = MapUtils.getMap( "/ch2/test.json" );
         Map Hailey = (Map) map.get( "Hailey" );
         Map Veronica = (Map) map.get( "Veronica" );
         Map Jordyn = (Map) map.get( "Jordyn" );
@@ -61,26 +62,16 @@ public class TestDistanceByFile {
     double computePearson( Map v1Map, Map v2Map ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        for ( Object key : v1Map.keySet() ) {
-            if ( v2Map.containsKey( key ) ) {
-                v1.add( (double) v1Map.get( key ) );
-                v2.add( (double) v2Map.get( key ) );
-            }
-        }
-        return PearsonUtils.calculate( v1, v2 );
+        MapUtils.fillVector( v1, v2, v1Map, v2Map );
+        return new Pearson().calculate( v1, v2 );
     }
 
     @SuppressWarnings( "rawtypes" )
     double computePearsonSimilar( Map v1Map, Map v2Map ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        for ( Object key : v1Map.keySet() ) {
-            if ( v2Map.containsKey( key ) ) {
-                v1.add( (double) v1Map.get( key ) );
-                v2.add( (double) v2Map.get( key ) );
-            }
-        }
-        return PearsonUtils.calculateSimilar( v1, v2 );
+        MapUtils.fillVector( v1, v2, v1Map, v2Map );
+        return new PearsonSimilar().calculate( v1, v2 );
     }
 
     @SuppressWarnings( "rawtypes" )
@@ -92,13 +83,8 @@ public class TestDistanceByFile {
     double computeManhattan( Map v1Map, Map v2Map ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        for ( Object key : v1Map.keySet() ) {
-            if ( v2Map.containsKey( key ) ) {
-                v1.add( (double) v1Map.get( key ) );
-                v2.add( (double) v2Map.get( key ) );
-            }
-        }
-        return DistanceUtils.manhattan( v1, v2 );
+        MapUtils.fillVector( v1, v2, v1Map, v2Map );
+        return new Manhattan().calculate( v1, v2 );
     }
 
     @SuppressWarnings( "rawtypes" )
@@ -111,23 +97,7 @@ public class TestDistanceByFile {
                 res.put( (String) key, computeManhattan( target, v2Map ) );
             }
         }
-        return sortMap( res );
-    }
-
-    Map<String, Double> sortMap( Map<String, Double> res ) {
-        Map<String, Double> res1 = new LinkedHashMap<>();
-        res.entrySet().stream() //
-                .sorted( Comparator.comparing( Map.Entry::getValue ) ) //
-                .forEach( e -> res1.put( e.getKey(), e.getValue() ) );
-        return res1;
-    }
-
-    Map<String, Double> sortDescMap( Map<String, Double> res ) {
-        Map<String, Double> res1 = new LinkedHashMap<>();
-        res.entrySet().stream() //
-                .sorted( ( e1, e2 ) -> Double.compare( e2.getValue(), e1.getValue() ) ) //
-                .forEach( e -> res1.put( e.getKey(), e.getValue() ) );
-        return res1;
+        return MapUtils.sort( res );
     }
 
     @SuppressWarnings( "rawtypes" )
@@ -142,15 +112,7 @@ public class TestDistanceByFile {
                 res.put( (String) k, (Double) value.get( k ) );
             }
         }
-        return sortDescMap( res );
-    }
-
-    @Test
-    public void test_euclid() {
-    }
-
-    @Test
-    public void test_minkowski() {
+        return MapUtils.sortDesc( res );
     }
 
 }

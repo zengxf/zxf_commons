@@ -8,9 +8,21 @@ package cn.zxf.commons.data_mining.numbers;
  */
 public class NumberAsserts {
 
+    public static void assertArrayNotNull( double[] arr ) {
+        if ( arr == null || arr.length == 0 )
+            fail( "数组不能为空！" );
+    }
+
     public static void assertVectorNotNull( VectorVo vo ) {
         if ( vo == null || vo.getLen() == 0 )
             fail( "向量不能为空！" );
+    }
+
+    public static void assertArrayLen( double[] arr1, double[] arr2 ) {
+        assertArrayNotNull( arr1 );
+        assertArrayNotNull( arr2 );
+        if ( arr1.length != arr2.length )
+            fail( "两数组长度不一致！" );
     }
 
     public static void assertVectorLen( VectorVo v1, VectorVo v2 ) {

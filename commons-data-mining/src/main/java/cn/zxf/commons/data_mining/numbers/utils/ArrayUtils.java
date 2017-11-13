@@ -1,4 +1,4 @@
-package cn.zxf.commons.data_mining.numbers;
+package cn.zxf.commons.data_mining.numbers.utils;
 
 import java.util.stream.DoubleStream;
 
