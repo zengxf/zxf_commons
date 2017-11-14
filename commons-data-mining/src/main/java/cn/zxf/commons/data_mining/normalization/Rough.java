@@ -9,7 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * 粗略的标准化——简单
+ * 粗略的标准化——简单<br>
+ * 正规化（0~1 之间）
  * 
  * <p>
  * Created by zengxf on 2017-11-13

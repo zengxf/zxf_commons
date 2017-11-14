@@ -36,6 +36,27 @@ public class TestClassifier {
     public void testCorrect() {
         List<ClassifyItem> testData = ClassifyDataUtil.test();
         List<ClassifyItem> trainingData = ClassifyDataUtil.training();
+        AtomicInteger correct = this.test( testData, trainingData, true );
+        Assert.assertThat( correct.get(), CoreMatchers.is( 16 ) );
+    }
+
+    @Test
+    public void testIrisCorrect() {
+        List<ClassifyItem> testData = ClassifyDataUtil.iris_test();
+        List<ClassifyItem> trainingData = ClassifyDataUtil.iris_training();
+        AtomicInteger correct = this.test( testData, trainingData, true );
+        Assert.assertThat( correct.get(), CoreMatchers.is( 29 ) );
+    }
+
+    @Test
+    public void testMpgCorrect() {
+        List<ClassifyItem> testData = ClassifyDataUtil.mpg_test();
+        List<ClassifyItem> trainingData = ClassifyDataUtil.mpg_training();
+        AtomicInteger correct = this.test( testData, trainingData, true );
+        Assert.assertThat( correct.get(), CoreMatchers.is( 28 ) );
+    }
+
+    AtomicInteger test( List<ClassifyItem> testData, List<ClassifyItem> trainingData, boolean isNorm ) {
         trainingData.forEach( item -> {
             log.info( "training-data-item: {}", item );
         } );
@@ -48,6 +69,7 @@ public class TestClassifier {
         Classifier classifier = Classifier.builder()//
                 .data( trainingData )//
                 .disCalc( new Euclidean() ) //
+                .isNorm( isNorm ) //
                 .build();
 
         AtomicInteger correct = new AtomicInteger();
@@ -55,13 +77,15 @@ public class TestClassifier {
             String classify = classifier //
                     .target( item.getVector() ) //
                     .classify();
-            if ( Objects.equals( classify, item.getClassify() ) ) {
+            boolean isCorrect = Objects.equals( classify, item.getClassify() );
+            log.info( "is-correct: {}, act: {}, pre: {}", isCorrect, item.getClassify(), classify );
+            if ( isCorrect ) {
                 correct.incrementAndGet();
             }
         } );
 
         log.info( "总数：{}, 正确数：{}, 正确率: {}", testData.size(), correct, correct.get() * 100 / testData.size() );
-        Assert.assertThat( correct.get(), CoreMatchers.is( 16 ) );
+        return correct;
     }
 
 }

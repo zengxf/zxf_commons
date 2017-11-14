@@ -13,6 +13,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 分类器<br>
+ * 距离越短才越近
+ * 
+ * <p>
+ * Created by zengxf on 2017-11-13
+ */
 @Slf4j
 @Data
 @Builder
@@ -21,29 +28,38 @@ public class Classifier {
     private DistanceCalculator disCalc;
     private List<ClassifyItem> data;
     private VectorVo           target;
+    private boolean            isNorm;    // true 表示需要标准化
     // ------------
     private double[][]         normArr;   // median, asd
     private List<ClassifyItem> normData;
     private VectorVo           normTarget;
 
     public String classify() {
-        if ( normArr == null )
+        if ( !isNorm ) {
+            this.normData = data;
+            this.normTarget = target;
+        } else if ( normArr == null )
             this.normalizeVector();
         return this.nearestNeighbor().get( 0 ).getClassify();
     }
 
     public Classifier target( VectorVo target ) {
         this.target = target;
-        if ( normArr != null )
+        if ( !isNorm )
+            this.normTarget = target;
+        else if ( normArr != null )
             this.normalizeTarget();
         return this;
     }
 
+    /**
+     * 距离越短才越近
+     */
     private List<ClassifyItem> nearestNeighbor() {
         return normData.stream().sorted( ( i1, i2 ) -> {
             double d1 = disCalc.calculate( this.normTarget, i1.getVector() );
             double d2 = disCalc.calculate( this.normTarget, i2.getVector() );
-            return Double.compare( d1, d2 );
+            return Double.compare( d1, d2 ); // 距离越短才越近
         } ).collect( Collectors.toList() );
     }
 

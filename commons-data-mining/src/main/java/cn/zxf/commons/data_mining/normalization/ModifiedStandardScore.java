@@ -8,7 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * 修正的标准分-分值偏离均值的程度
+ * 修正的标准分-分值偏离均值的程度<br>
+ * 标准化（均值为 0，偏离均值的程度（即标准偏差或绝对偏差）
  * 
  * <p>
  * Created by zengxf on 2017-11-13
