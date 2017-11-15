@@ -11,15 +11,19 @@ import java.nio.file.StandardOpenOption;
 public class FileMerge {
 
     public static void main( String[] args ) throws URISyntaxException, IOException {
+        String sign = "pima";
+
         Path path = Paths.get( ClassifyDataUtil.class.getResource( "/" ).toURI() );
-        path = path.resolve( "../src/test/resources/ch5/mpgData" ).normalize();
+        path = path.resolve( "../src/test/resources/ch5/" + sign ).normalize();
         System.out.println( path );
         System.out.println( "-----------------------" );
-        Path target = path.resolve( "mpgAll.txt" );
+        Path target = path.resolve( "all.txt" );
+        if ( !Files.exists( target ) )
+            Files.createFile( target );
         System.out.println( target );
         System.out.println( "-----------------------" );
         Files.list( path ) //
-                .filter( fp -> fp.toString().contains( "mpgData-" ) ) //
+                .filter( fp -> fp.toString().contains( sign + "-" ) ) //
                 .peek( fp -> System.out.println( fp ) ) //
                 .flatMap( fp -> {
                     try {

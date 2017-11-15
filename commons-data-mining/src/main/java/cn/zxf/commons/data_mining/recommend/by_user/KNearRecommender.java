@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import cn.zxf.commons.data_mining.commons.MapUtils;
+import cn.zxf.commons.data_mining.commons.MapUtilsForTest;
 import cn.zxf.commons.data_mining.numbers.VectorVo;
 import cn.zxf.commons.data_mining.numbers.distance.DistanceCalculator;
 import cn.zxf.commons.data_mining.vo.User;
@@ -55,7 +56,7 @@ public class KNearRecommender {
     private double distance( User u1, User u2 ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        MapUtils.fillVector( v1, v2, u1.scoreMap, u2.scoreMap );
+        MapUtilsForTest.fillVector( v1, v2, u1.scoreMap, u2.scoreMap );
         return calculator.calculate( v1, v2 );
     }
 

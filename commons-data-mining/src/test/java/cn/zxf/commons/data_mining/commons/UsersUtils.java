@@ -10,7 +10,7 @@ public class UsersUtils {
     @SuppressWarnings( { "rawtypes", "unchecked" } )
     public static Users getUsers( String jsonFile ) {
         Users users = new Users();
-        Map map = MapUtils.getMap( jsonFile );
+        Map map = MapUtilsForTest.getMap( jsonFile );
         map.forEach( ( k, v ) -> {
             User user = getUser( k.toString(), v );
             users.data.add( user );

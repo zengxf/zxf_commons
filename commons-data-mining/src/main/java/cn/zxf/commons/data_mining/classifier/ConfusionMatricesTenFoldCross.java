@@ -22,6 +22,8 @@ import lombok.Data;
 public class ConfusionMatricesTenFoldCross {
 
     private List<ClassifyItem>              data;
+    private boolean                         isKnn;
+    private int                             k;
     private final int                       n      = 10;
     // ----------------------
     private final Map<String, MatricesItem> result = new HashMap<>();
@@ -36,17 +38,29 @@ public class ConfusionMatricesTenFoldCross {
                 else
                     training.add( data.get( i ) );
             }
-            Classifier classifier = Classifier.builder() //
-                    .isNorm( true ) //
-                    .data( training ) //
-                    .disCalc( new Euclidean() ) //
-                    .build();
+            IClassifier classifier = classifier( training );
             test.forEach( item -> {
                 String forecast = classifier.target( item.getVector() ).classify();
                 this.log( item.getClassify(), forecast );
             } );
         }
         return this;
+    }
+
+    IClassifier classifier( List<ClassifyItem> training ) {
+        if ( !isKnn )
+            return Classifier.builder() //
+                    .isNorm( true ) //
+                    .data( training ) //
+                    .disCalc( new Euclidean() ) //
+                    .build();
+        else
+            return KnnClassifier.builder() //
+                    .isNorm( true ) //
+                    .data( training ) //
+                    .disCalc( new Euclidean() ) //
+                    .k( k ) //
+                    .build();
     }
 
     private void log( String actual, String forecast ) {
@@ -62,6 +76,12 @@ public class ConfusionMatricesTenFoldCross {
         }
     }
 
+    /**
+     * 混淆矩阵项
+     * 
+     * <p>
+     * Created by zengxf on 2017-11-15
+     */
     @Data
     public static class MatricesItem {
         String               actual;

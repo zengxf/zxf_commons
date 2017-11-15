@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import cn.zxf.commons.data_mining.commons.FileUtils;
 import cn.zxf.commons.data_mining.commons.MapUtils;
+import cn.zxf.commons.data_mining.commons.MapUtilsForTest;
 import cn.zxf.commons.data_mining.numbers.distance.Manhattan;
 import cn.zxf.commons.data_mining.numbers.distance.Pearson;
 import cn.zxf.commons.data_mining.numbers.distance.PearsonSimilar;
@@ -20,7 +21,7 @@ public class TestDistanceByFile {
     @SuppressWarnings( "rawtypes" )
     @Test
     public void test_manhattan() throws IOException {
-        Map map = MapUtils.getMap( "/ch2/test.json" );
+        Map map = MapUtilsForTest.getMap( "/ch2/test.json" );
         Map Hailey = (Map) map.get( "Hailey" );
         Map Veronica = (Map) map.get( "Veronica" );
         Map Jordyn = (Map) map.get( "Jordyn" );
@@ -62,7 +63,7 @@ public class TestDistanceByFile {
     double computePearson( Map v1Map, Map v2Map ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        MapUtils.fillVector( v1, v2, v1Map, v2Map );
+        MapUtilsForTest.fillVector( v1, v2, v1Map, v2Map );
         return new Pearson().calculate( v1, v2 );
     }
 
@@ -70,7 +71,7 @@ public class TestDistanceByFile {
     double computePearsonSimilar( Map v1Map, Map v2Map ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        MapUtils.fillVector( v1, v2, v1Map, v2Map );
+        MapUtilsForTest.fillVector( v1, v2, v1Map, v2Map );
         return new PearsonSimilar().calculate( v1, v2 );
     }
 
@@ -83,7 +84,7 @@ public class TestDistanceByFile {
     double computeManhattan( Map v1Map, Map v2Map ) {
         VectorVo v1 = new VectorVo();
         VectorVo v2 = new VectorVo();
-        MapUtils.fillVector( v1, v2, v1Map, v2Map );
+        MapUtilsForTest.fillVector( v1, v2, v1Map, v2Map );
         return new Manhattan().calculate( v1, v2 );
     }
 

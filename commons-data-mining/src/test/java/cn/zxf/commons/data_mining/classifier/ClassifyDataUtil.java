@@ -27,21 +27,7 @@ class ClassifyDataUtil {
     }
 
     static List<ClassifyItem> data( String file ) {
-        try {
-            Path path = Paths.get( ClassifyDataUtil.class.getResource( file ).toURI() );
-            List<String> lines = Files.readAllLines( path );
-            return lines.stream().map( line -> {
-                ClassifyItem item = new ClassifyItem();
-                String[] arr = line.split( "\t+" );
-                item.setCommend( arr[0] );
-                item.setClassify( arr[1] );
-                double[] values = Stream.of( arr ).skip( 2 ).mapToDouble( Double::parseDouble ).toArray();
-                item.setVector( VectorVo.of( values ) );
-                return item;
-            } ).collect( Collectors.toList() );
-        } catch ( URISyntaxException | IOException e ) {
-            throw new RuntimeException( "读取数据时出错！", e );
-        }
+        return data( file, "\t+", 2, Integer.MAX_VALUE, 1, 0 );
     }
 
     public static List<ClassifyItem> iris_training() {
@@ -53,21 +39,7 @@ class ClassifyDataUtil {
     }
 
     static List<ClassifyItem> iris_data( String file ) {
-        try {
-            Path path = Paths.get( ClassifyDataUtil.class.getResource( file ).toURI() );
-            List<String> lines = Files.readAllLines( path );
-            return lines.stream().map( line -> {
-                ClassifyItem item = new ClassifyItem();
-                String[] arr = line.split( "\\s+" );
-                item.setCommend( "" );
-                item.setClassify( arr[4] );
-                double[] values = Stream.of( arr ).limit( 4 ).mapToDouble( Double::parseDouble ).toArray();
-                item.setVector( VectorVo.of( values ) );
-                return item;
-            } ).collect( Collectors.toList() );
-        } catch ( URISyntaxException | IOException e ) {
-            throw new RuntimeException( "读取数据时出错！", e );
-        }
+        return data( file, "\\s+", 0, 4, 4, -1 );
     }
 
     public static List<ClassifyItem> mpg_training() {
@@ -83,15 +55,32 @@ class ClassifyDataUtil {
     }
 
     static List<ClassifyItem> mpg_data( String file ) {
+        return data( file, "\t+", 1, 5, 0, 6 );
+    }
+
+    public static List<ClassifyItem> pima_data() {
+        return pima_data( "/ch5/pimaSmall/all.txt" );
+    }
+
+    public static List<ClassifyItem> pimaBig_data() {
+        return pima_data( "/ch5/pima/all.txt" );
+    }
+
+    static List<ClassifyItem> pima_data( String file ) {
+        return data( file, "\t+", 0, 8, 8, -1 );
+    }
+
+    static List<ClassifyItem> data( String file, String regex, int skip, int limit, int classifyIndex, int commendIndex ) {
         try {
             Path path = Paths.get( ClassifyDataUtil.class.getResource( file ).toURI() );
             List<String> lines = Files.readAllLines( path );
             return lines.stream().map( line -> {
                 ClassifyItem item = new ClassifyItem();
-                String[] arr = line.split( "\t+" );
-                item.setCommend( arr[6] );
-                item.setClassify( arr[0] );
-                double[] values = Stream.of( arr ).skip( 1 ).limit( 5 ).mapToDouble( Double::parseDouble ).toArray();
+                String[] arr = line.split( regex );
+                item.setClassify( arr[classifyIndex] );
+                if ( commendIndex > -1 )
+                    item.setCommend( arr[commendIndex] );
+                double[] values = Stream.of( arr ).skip( skip ).limit( limit ).mapToDouble( Double::parseDouble ).toArray();
                 item.setVector( VectorVo.of( values ) );
                 return item;
             } ).collect( Collectors.toList() );
@@ -127,5 +116,5 @@ class ClassifyDataUtil {
         System.out.println();
         return correct.get();
     }
-    
+
 }

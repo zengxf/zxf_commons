@@ -16,7 +16,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * kappa 指标
+ * kappa 指标<br>
+ * 用于确定分类效果是否好
  * 
  * <pre>
  *   <= 0   差

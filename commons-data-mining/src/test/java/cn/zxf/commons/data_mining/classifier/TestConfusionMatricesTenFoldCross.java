@@ -3,6 +3,8 @@ package cn.zxf.commons.data_mining.classifier;
 import java.util.List;
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Test;
 
 import cn.zxf.commons.data_mining.classifier.ConfusionMatricesTenFoldCross.MatricesItem;
@@ -19,6 +21,7 @@ public class TestConfusionMatricesTenFoldCross {
                 .getResult();
         int correct = ClassifyDataUtil.printAndReturn( result );
         System.out.println( "正确：" + correct + "，正确率：" + ( correct * 100D / data.size() ) );
+        Assert.assertThat( correct, CoreMatchers.is( 188 ) );
     }
 
 }

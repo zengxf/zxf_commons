@@ -1,16 +1,21 @@
 package cn.zxf.commons.data_mining.classifier;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
+import cn.zxf.commons.data_mining.commons.MapUtils;
 import cn.zxf.commons.data_mining.numbers.NumberAsserts;
 import cn.zxf.commons.data_mining.numbers.VectorVo;
 import cn.zxf.commons.data_mining.numbers.distance.DistanceCalculator;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,12 +28,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @Builder
-public class Classifier {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Classifier implements IClassifier {
 
     private DistanceCalculator disCalc;
     private List<ClassifyItem> data;
     private VectorVo           target;
     private boolean            isNorm;    // true 表示需要标准化
+    // ------------
+    private int                k;         // def 1
     // ------------
     private double[][]         normArr;   // median, asd
     private List<ClassifyItem> normData;
@@ -40,7 +49,13 @@ public class Classifier {
             this.normTarget = target;
         } else if ( normArr == null )
             this.normalizeVector();
-        return this.nearestNeighbor().get( 0 ).getClassify();
+        List<ClassifyItem> nnList = this.nearestNeighbor();
+        if ( k <= 1 )
+            return nnList.get( 0 ).getClassify();
+        Map<String, Double> nnMap = nnList.stream() //
+                .limit( k ) //
+                .collect( Collectors.toMap( ci -> ci.getClassify(), ci -> 1D, ( v1, v2 ) -> v1 + v2, HashMap::new ) );
+        return MapUtils.sortDesc( nnMap ).keySet().iterator().next();
     }
 
     public Classifier target( VectorVo target ) {
