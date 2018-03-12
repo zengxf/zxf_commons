@@ -39,12 +39,14 @@ public class EventsBuilder {
     }
 
     public EventsBuilder print() {
+        System.out.println();
         attributeNames.forEach( name -> System.out.print( "\t" + name + "\t|" ) );
         System.out.println();
         attributeValues.forEach( values -> {
             Stream.of( values ).forEach( value -> System.out.print( "\t" + value + "\t|" ) );
             System.out.println();
         } );
+        System.out.println();
         return this;
     }
 

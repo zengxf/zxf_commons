@@ -13,6 +13,10 @@ public class Event {
     public static class EventAttribute {
         public final String name;
         public final String value;
+
+        public static EventAttribute of( String name, String value ) {
+            return new EventAttribute( name, value );
+        }
     }
 
 }
