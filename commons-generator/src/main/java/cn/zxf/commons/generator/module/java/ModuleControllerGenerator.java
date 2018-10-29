@@ -14,19 +14,18 @@ public class ModuleControllerGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#;\n" + //
             "\n" + //
-            "import com.hunterplus.server.basic.controller.BasicController;\n" + //
+            "import io.swagger.annotations.Api;\n" + //
             "import org.springframework.beans.factory.annotation.Autowired;\n" + //
             "import org.springframework.web.bind.annotation.RequestMapping;\n" + //
             "import org.springframework.web.bind.annotation.RestController;\n" + //
             "\n" + //
             "/**\n" + //
-            " * #comment# \n" + //
-            " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
+            "@Api(tags = \"#comment#\")\n" + //
             "@RestController\n" + //
             "@RequestMapping(\"#api_path#\")\n" + //
-            "public class #class_name# extends BasicController {\n" + //
+            "public class #class_name# {\n" + //
             "\n" + //
             "    @Autowired\n" + //
             "    private #module#Service service;\n" + //
@@ -34,12 +33,12 @@ public class ModuleControllerGenerator extends AbstractClassGenerator {
             "}\n";
 
     protected ModuleControllerGenerator( ModuleDescriptor desc ) {
-	super( ClassTypeEnum.CONTROLLER, desc );
+        super( ClassTypeEnum.CONTROLLER, desc );
     }
 
     @Override
     protected String getClassFormat() {
-	return CONTENT_FORMAT;
+        return CONTENT_FORMAT;
     }
 
     /**
@@ -49,7 +48,7 @@ public class ModuleControllerGenerator extends AbstractClassGenerator {
      * @return
      */
     public static ModuleControllerGenerator of( ModuleDescriptor desc ) {
-	return new ModuleControllerGenerator( desc );
+        return new ModuleControllerGenerator( desc );
     }
 
 }

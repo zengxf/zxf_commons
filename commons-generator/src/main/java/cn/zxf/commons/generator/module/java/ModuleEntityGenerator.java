@@ -14,7 +14,7 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#;\n" + //
             "\n" + //
-            "import com.hunterplus.server.basic.domain.BasicModelObject;\n" + //
+            "import com.hunterplus.server.common.domain.BasicModelObject;\n" + //
             "import lombok.Data;\n" + //
             "import org.springframework.data.annotation.Id;\n" + //
             "import org.springframework.data.mongodb.core.mapping.Document;\n" + //
@@ -24,8 +24,8 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
             " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
-            "@Document(collection = \"#collection#\")\n" + //
             "@Data\n" + //
+            "@Document(collection = \"#collection#\")\n" + //
             "public class #class_name# extends BasicModelObject implements #module#Constant {\n" + //
             "\n" + //
             "    @Id\n" + //

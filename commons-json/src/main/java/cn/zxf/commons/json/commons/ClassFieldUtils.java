@@ -11,7 +11,7 @@ import lombok.Builder;
 
 public class ClassFieldUtils {
 
-//    static final int                               CAPACITY = 2; // used to test
+    // static final int CAPACITY = 2; // used to test
     static final int                               CAPACITY = 100;
     static final AtomicInteger                     SIGN     = new AtomicInteger();
     static final ConcurrentMap<String, ClassField> CACHE    = new ConcurrentHashMap<>( CAPACITY );
@@ -32,7 +32,8 @@ public class ClassFieldUtils {
     static void checkAndRemove() {
         if ( CACHE.size() > CAPACITY ) {
             int bound = SIGN.get() - CAPACITY;
-            Iterator<ClassField> iter = CACHE.values().iterator();
+            Iterator<ClassField> iter = CACHE.values()
+                    .iterator();
             while ( iter.hasNext() ) {
                 if ( iter.next().index <= bound )
                     iter.remove();

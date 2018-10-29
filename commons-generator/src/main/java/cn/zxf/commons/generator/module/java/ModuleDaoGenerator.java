@@ -14,7 +14,7 @@ public class ModuleDaoGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#;\n" + //
             "\n" + //
-            "import com.hunterplus.common.mongodb.BasicMongoDao;\n" + //
+            "import com.hunterplus.common.mongodb.CommonMongoDao;\n" + //
             "import org.springframework.stereotype.Component;\n" + //
             "\n" + //
             "/**\n" + //
@@ -23,22 +23,21 @@ public class ModuleDaoGenerator extends AbstractClassGenerator {
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
             "@Component\n" + //
-            "public class #class_name# extends BasicMongoDao<#module#> implements #module#Constant {\n" + //
+            "public class #class_name# extends CommonMongoDao<#module#> implements #module#Constant {\n" + //
             "\n" + //
-            "    @Override\n" + //
-            "    public Class<#module#> getReturnClass() {\n" + //
-            "        return #module#.class;\n" + //
+            "    public #class_name#() {\n" + //
+            "        super(#module#.class);\n" + //
             "    }\n" + //
             "\n" + //
             "}\n";
 
     protected ModuleDaoGenerator( ModuleDescriptor desc ) {
-	super( ClassTypeEnum.MONGO_DAO, desc );
+        super( ClassTypeEnum.MONGO_DAO, desc );
     }
 
     @Override
     protected String getClassFormat() {
-	return CONTENT_FORMAT;
+        return CONTENT_FORMAT;
     }
 
     /**
@@ -48,7 +47,7 @@ public class ModuleDaoGenerator extends AbstractClassGenerator {
      * @return
      */
     public static ModuleDaoGenerator of( ModuleDescriptor desc ) {
-	return new ModuleDaoGenerator( desc );
+        return new ModuleDaoGenerator( desc );
     }
 
 }

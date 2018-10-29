@@ -72,18 +72,25 @@ class ClassifyDataUtil {
 
     static List<ClassifyItem> data( String file, String regex, int skip, int limit, int classifyIndex, int commendIndex ) {
         try {
-            Path path = Paths.get( ClassifyDataUtil.class.getResource( file ).toURI() );
+            Path path = Paths.get( ClassifyDataUtil.class.getResource( file )
+                    .toURI() );
             List<String> lines = Files.readAllLines( path );
-            return lines.stream().map( line -> {
-                ClassifyItem item = new ClassifyItem();
-                String[] arr = line.split( regex );
-                item.setClassify( arr[classifyIndex] );
-                if ( commendIndex > -1 )
-                    item.setCommend( arr[commendIndex] );
-                double[] values = Stream.of( arr ).skip( skip ).limit( limit ).mapToDouble( Double::parseDouble ).toArray();
-                item.setVector( VectorVo.of( values ) );
-                return item;
-            } ).collect( Collectors.toList() );
+            return lines.stream()
+                    .map( line -> {
+                        ClassifyItem item = new ClassifyItem();
+                        String[] arr = line.split( regex );
+                        item.setClassify( arr[classifyIndex] );
+                        if ( commendIndex > -1 )
+                            item.setCommend( arr[commendIndex] );
+                        double[] values = Stream.of( arr )
+                                .skip( skip )
+                                .limit( limit )
+                                .mapToDouble( Double::parseDouble )
+                                .toArray();
+                        item.setVector( VectorVo.of( values ) );
+                        return item;
+                    } )
+                    .collect( Collectors.toList() );
         } catch ( URISyntaxException | IOException e ) {
             throw new RuntimeException( "读取数据时出错！", e );
         }
@@ -91,10 +98,12 @@ class ClassifyDataUtil {
 
     static int printAndReturn( Map<String, MatricesItem> result ) {
         Set<String> set = new TreeSet<>();
-        result.values().forEach( item -> {
-            set.add( item.getActual() );
-            set.addAll( item.getErrorMap().keySet() );
-        } );
+        result.values()
+                .forEach( item -> {
+                    set.add( item.getActual() );
+                    set.addAll( item.getErrorMap()
+                            .keySet() );
+                } );
         System.out.println();
         set.forEach( k -> System.out.print( "\t" + k ) );
         System.out.println();
@@ -109,7 +118,8 @@ class ClassifyDataUtil {
                     correct.addAndGet( correctCount );
                     System.out.print( correctCount );
                 } else
-                    System.out.print( mi.getErrorMap().getOrDefault( ki, 0 ) );
+                    System.out.print( mi.getErrorMap()
+                            .getOrDefault( ki, 0 ) );
             } );
             System.out.println();
         } );
