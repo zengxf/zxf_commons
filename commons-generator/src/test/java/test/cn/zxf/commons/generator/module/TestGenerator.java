@@ -9,25 +9,26 @@ import cn.zxf.commons.generator.module.ModuleDescriptor;
 import cn.zxf.commons.generator.module.ModuleGenerator;
 
 public class TestGenerator {
-    static String BASIC_PATH = "D:/test/jdk17/core";
+    static String BASIC_PATH = "L:\\test\\core";
 
     public static void main( String[] args ) {
         delAll();
 
-        System.out.println( "BASIC_PATH: " + BASIC_PATH );
+        System.out.println( "BASIC_PATH: " + BASIC_PATH + "\n" );
 
         ModuleDescriptor desc = ModuleDescriptor.builder()
-                .moduleComment( "组归属时间" ) // 所有注释-主要标识
-                .modulePackage( "objectives.team_belong" ) // 模块-子包名
-                .moduleEntityName( "TeamBelong" ) // 实体类名
-                .apiPath( "/api/team-belong" ) // API 接口 URL
-                .moduleEntityCollection( "team_belong" ) // MongoDB 集合名
+
+                .moduleComment( "交付人选库" ) // 所有注释-主要标识
+                .modulePackage( "candidate.delivery_candidate" ) // 模块-子包名
+                .moduleEntityName( "DeliveryCandidate" ) // 实体类名
+                .apiPath( "/api/candidate/delivery-candidate" ) // API 接口 URL
+                .moduleEntityCollection( "delivery_candidate" ) // MongoDB 集合名
                 .createDtoPackage( true ) // 是否创建 DTO 包
+                .createEnumsPackage( true ) // 是否创建 enums 包
 
                 .basicPath( BASIC_PATH )
                 .author( "zengxf" )
                 .basicPackage( "com.hunterplus.server.module" )
-                .createEnumsPackage( false )
                 .build();
 
         String descStr = desc.toString()

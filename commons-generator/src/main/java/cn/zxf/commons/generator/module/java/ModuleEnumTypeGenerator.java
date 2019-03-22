@@ -14,33 +14,34 @@ public class ModuleEnumTypeGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#.enums;\n" + //
             "\n" + //
+            "import lombok.AllArgsConstructor;\n" + //
+            "import lombok.Getter;\n" + //
+            "\n" + //
             "/**\n" + //
             " * #comment# \n" + //
             " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
+            "@AllArgsConstructor\n" + //
             "public enum #class_name# {\n" + //
             "\n" + //
             "    ERROR(-1, \"类型错误\"), //\n" + //
             "    XXX(1, \"XXX\"), //\n" + //
             "    ;\n" + //
             "\n" + //
-            "    public final Integer code;\n" + //
+            "    @Getter\n" + //
+            "    public final int code;\n" + //
             "    public final String desc;\n" + //
             "\n" + //
-            "    #class_name#(Integer code, String desc) {\n" + //
-            "        this.code = code;\n" + //
-            "        this.desc = desc;\n" + //
-            "    }\n" + //
             "}\n";
 
     protected ModuleEnumTypeGenerator( ModuleDescriptor desc ) {
-	super( ClassTypeEnum.ENUM_TYPE, desc );
+        super( ClassTypeEnum.ENUM_TYPE, desc );
     }
 
     @Override
     protected String getClassFormat() {
-	return CONTENT_FORMAT;
+        return CONTENT_FORMAT;
     }
 
     /**
@@ -50,7 +51,7 @@ public class ModuleEnumTypeGenerator extends AbstractClassGenerator {
      * @return
      */
     public static ModuleEnumTypeGenerator of( ModuleDescriptor desc ) {
-	return new ModuleEnumTypeGenerator( desc );
+        return new ModuleEnumTypeGenerator( desc );
     }
 
 }

@@ -14,20 +14,20 @@ public enum ClassTypeEnum {
     ;
 
     /** 类名后缀 */
-    public final String	classSuffix;
+    public final String classSuffix;
     /** 类注释后缀 */
-    public final String	commentSuffix;
+    public final String commentSuffix;
     /** 应该保存的相对位置的父路径 */
-    public final String	parentPath;
+    public final String parentPath;
 
     private ClassTypeEnum( String classSuffix, String commentSuffix ) {
-	this( classSuffix, commentSuffix, "" );
+        this( classSuffix, commentSuffix, "" );
     }
 
     private ClassTypeEnum( String classSuffix, String commentSuffix, String parentPath ) {
-	this.classSuffix = classSuffix;
-	this.commentSuffix = commentSuffix;
-	this.parentPath = parentPath;
+        this.classSuffix = classSuffix;
+        this.commentSuffix = commentSuffix;
+        this.parentPath = parentPath;
     }
 
 }

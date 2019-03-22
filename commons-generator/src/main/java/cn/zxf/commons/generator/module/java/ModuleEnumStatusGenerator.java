@@ -14,24 +14,25 @@ public class ModuleEnumStatusGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#.enums;\n" + //
             "\n" + //
+            "import lombok.AllArgsConstructor;\n" + //
+            "import lombok.Getter;\n" + //
+            "\n" + //
             "/**\n" + //
             " * #comment# \n" + //
             " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
+            "@AllArgsConstructor\n" + //
             "public enum #class_name# {\n" + //
             "\n" + //
             "    ERROR(-1, \"状态错误\"), //\n" + //
             "    XXX(1, \"XXX\"), //\n" + //
             "    ;\n" + //
             "\n" + //
-            "    public final Integer code;\n" + //
+            "    @Getter\n" + //
+            "    public final int code;\n" + //
             "    public final String desc;\n" + //
             "\n" + //
-            "    #class_name#(Integer code, String desc) {\n" + //
-            "        this.code = code;\n" + //
-            "        this.desc = desc;\n" + //
-            "    }\n" + //
             "}\n";
 
     protected ModuleEnumStatusGenerator( ModuleDescriptor desc ) {
