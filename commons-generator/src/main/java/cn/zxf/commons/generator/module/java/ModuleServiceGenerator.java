@@ -14,16 +14,19 @@ public class ModuleServiceGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#;\n" + //
             "\n" + //
+            "import htp.midaner.commonweb.AbstractService;\n" + //
             "import org.springframework.beans.factory.annotation.Autowired;\n" + //
             "import org.springframework.stereotype.Component;\n" + //
+            "import org.springframework.validation.annotation.Validated;\n" + //
             "\n" + //
             "/**\n" + //
             " * #comment# \n" + //
             " * <p>\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
+            "@Validated\n" + //
             "@Component\n" + //
-            "public class #class_name# {\n" + //
+            "public class #class_name# extends AbstractService {\n" + //
             "\n" + //
             "    @Autowired\n" + //
             "    private #module#Dao dao;\n" + //
