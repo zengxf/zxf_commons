@@ -28,6 +28,8 @@ public class ModuleServiceGenerator extends AbstractClassGenerator {
             "@Component\n" + //
             "public class #class_name# extends AbstractService {\n" + //
             "\n" + //
+            "    private static final String PREFIX = \"xx\";" + //
+            "\n" + //
             "    @Autowired\n" + //
             "    private #module#Dao dao;\n" + //
             "\n" + //
