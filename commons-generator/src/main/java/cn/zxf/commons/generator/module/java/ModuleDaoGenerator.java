@@ -14,7 +14,7 @@ public class ModuleDaoGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#;\n" + //
             "\n" + //
-            "import com.hunterplus.common.mongodb.CommonMongoDao;\n" + //
+            "import hunterplus.mongo.CommonMongoDao;\n" + //
             "import org.springframework.stereotype.Component;\n" + //
             "\n" + //
             "/**\n" + //

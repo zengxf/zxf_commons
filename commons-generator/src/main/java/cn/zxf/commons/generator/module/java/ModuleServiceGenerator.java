@@ -26,7 +26,7 @@ public class ModuleServiceGenerator extends AbstractClassGenerator {
             "public class #class_name# {\n" + //
             "\n" + //
             "    @Autowired\n" + //
-            "    private #module#MongoDao dao;\n" + //
+            "    private #module#Dao dao;\n" + //
             "\n" + //
             "}\n";
 

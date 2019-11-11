@@ -3,7 +3,7 @@ package cn.zxf.commons.generator.module;
 public enum ClassTypeEnum {
 
     ENTITY( "", "实体类"), //
-    MONGO_DAO( "MongoDao", "Mongo DAO"), //
+    MONGO_DAO( "Dao", "Mongo DAO"), //
     SERVICE( "Service", "服务类"), //
     CONTROLLER( "Controller", "控制器"), //
     CONSTANT( "Constant", "常量接口"), //

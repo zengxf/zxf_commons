@@ -14,17 +14,13 @@ public class ModuleControllerGenerator extends AbstractClassGenerator {
 
     private static final String CONTENT_FORMAT = "package #package#;\n" + //
             "\n" + //
-            "import io.swagger.annotations.Api;\n" + //
             "import org.springframework.beans.factory.annotation.Autowired;\n" + //
-            "import org.springframework.web.bind.annotation.RequestMapping;\n" + //
             "import org.springframework.web.bind.annotation.RestController;\n" + //
             "\n" + //
             "/**\n" + //
             " * Created by #author# on #date#.\n" + //
             " */\n" + //
-            "@Api(tags = \"#comment#\")\n" + //
             "@RestController\n" + //
-            "@RequestMapping(\"#api_path#\")\n" + //
             "public class #class_name# {\n" + //
             "\n" + //
             "    @Autowired\n" + //
