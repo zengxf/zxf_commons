@@ -25,6 +25,8 @@ public class ModuleDaoGenerator extends AbstractClassGenerator {
             "@Component\n" + //
             "public class #class_name# extends CommonMongoDao<#module#> implements #module#Constant {\n" + //
             "\n" + //
+            "    private static final int PAGE_SIZE = 20;\n" + //
+            "\n" + //
             "    public #class_name#() {\n" + //
             "        super(#module#.class);\n" + //
             "    }\n" + //
