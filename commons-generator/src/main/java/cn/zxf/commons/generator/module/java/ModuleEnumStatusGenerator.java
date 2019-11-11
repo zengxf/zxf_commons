@@ -30,7 +30,7 @@ public class ModuleEnumStatusGenerator extends AbstractClassGenerator {
             "    ;\n" + //
             "\n" + //
             "    @Getter\n" + //
-            "    public final int code;\n" + //
+            "    public final Integer code;\n" + //
             "    public final String desc;\n" + //
             "\n" + //
             "}\n";
