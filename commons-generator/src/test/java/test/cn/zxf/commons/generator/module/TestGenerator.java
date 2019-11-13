@@ -18,12 +18,12 @@ public class TestGenerator {
 
         ModuleDescriptor desc = ModuleDescriptor.builder()
 
-                .moduleComment( "顾问审批记录" ) // 所有注释-主要标识
-                .modulePackage( "user_audit" ) // 模块-子包名
-                .moduleEntityName( "UserAudit" ) // 实体类名
+                .moduleComment( "猎企成员操作记录" ) // 所有注释-主要标识
+                .modulePackage( "hunter_company.hunter_company_member" ) // 模块-子包名
+                .moduleEntityName( "HunterCompanyMember" ) // 实体类名
                 .apiPath( "" ) // API 接口 URL
-                .moduleEntityCollection( "user_audit" ) // MongoDB 集合名
-                .createDtoPackage( true ) // 是否创建 DTO 包
+                .moduleEntityCollection( "hunter_company_member" ) // MongoDB 集合名
+//                .createDtoPackage( true ) // 是否创建 DTO 包
                 .createEnumsPackage( true ) // 是否创建 enums 包
 
                 .basicPath( BASIC_PATH )
