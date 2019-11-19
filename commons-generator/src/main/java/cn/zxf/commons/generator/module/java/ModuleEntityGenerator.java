@@ -16,6 +16,7 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
             "\n" + //
             "import hunterplus.mongo.MongoObject;\n" + //
             "import lombok.Data;\n" + //
+            "import java.util.Date;\n" + //
             "import org.springframework.data.annotation.Id;\n" + //
             "import org.springframework.data.mongodb.core.mapping.Document;\n" + //
             "\n" + //
@@ -30,6 +31,8 @@ public class ModuleEntityGenerator extends AbstractClassGenerator {
             "\n" + //
             "    @Id\n" + //
             "    private String id;\n" + //
+            "    private Date createDate;\n" + //
+            "    private Date modifyDate;\n" + //
             "\n" + //
             "}\n";
 
