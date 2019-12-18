@@ -1,10 +1,10 @@
 package cn.zxf.commons.basic.transform;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 两个对象相互转换的帮助类
@@ -18,8 +18,9 @@ public class BeanTransformUtil {
      * 转换并返回 <br>
      * 注：toClass 一定要有无参构造器
      */
-    public static < T > T transformAndGet( Object from, Class<T> toClass ) throws InstantiationException, IllegalAccessException {
-        T to = toClass.newInstance();
+    public static < T > T transformAndGet( Object from, Class<T> toClass ) throws Exception {
+        T to = toClass.getConstructor()
+                .newInstance();
         transform( from, to, false );
         return to;
     }
@@ -59,8 +60,8 @@ public class BeanTransformUtil {
             Limit limit = toField.getAnnotation( Limit.class );
 
             try {
-                boolean fromAcc = fromField.isAccessible();
-                boolean toAcc = toField.isAccessible();
+                boolean fromAcc = fromField.canAccess( from );
+                boolean toAcc = toField.canAccess( to );
 
                 if ( !fromAcc ) {
                     fromField.setAccessible( true );

@@ -8,8 +8,8 @@ public enum ClassTypeEnum {
     CONTROLLER( "Controller", "控制器"), //
     CONSTANT( "Constant", "常量接口"), //
     DTO_FACTORY( "DtoFactory", "Dto 工厂帮助类", "/dto"), //
-    ENUM_TYPE( "TypeEnum", "类型枚举类", "/enums"), //
-    ENUM_STATUS( "StatusEnum", "状态枚举类", "/enums"), //
+    ENUM_TYPE( "Type", "类型枚举类", "/enums"), //
+    ENUM_STATUS( "Status", "状态枚举类", "/enums"), //
 
     ;
 
