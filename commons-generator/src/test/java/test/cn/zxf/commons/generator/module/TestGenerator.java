@@ -18,17 +18,17 @@ public class TestGenerator {
 
         ModuleDescriptor desc = ModuleDescriptor.builder()
 
-                .moduleComment( "推荐消息" ) // 所有注释-主要标识
-                .modulePackage( "recommend_message" ) // 模块-子包名
-                .moduleEntityName( "RecommendMessage" ) // 实体类名
+                .moduleComment( "财税服务计划" ) // 所有注释-主要标识
+                .modulePackage( "hunter_service_plan" ) // 模块-子包名
+                .moduleEntityName( "HunterServicePlan" ) // 实体类名
                 .apiPath( "" ) // API 接口 URL
-                .moduleEntityCollection( "recommend_message" ) // MongoDB 集合名
-                // .createDtoPackage( true ) // 是否创建 DTO 包
-                .createEnumsPackage( true ) // 是否创建 enums 包
+                .moduleEntityCollection( "finance_hunter_service_plan" ) // MongoDB 集合名
+                .createDtoPackage( true ) // 是否创建 DTO 包
+//                .createEnumsPackage( true ) // 是否创建 enums 包
 
                 .basicPath( BASIC_PATH )
                 .author( "zengxf" )
-                .basicPackage( "htp.midaner" )
+                .basicPackage( "com.hunterplus.server.module.finance" )
                 .build();
 
         String descStr = desc.toString()
